@@ -1,0 +1,31 @@
+---
+# tasks file for vpc
+  - name: provision vpc
+    ec2_vpc:
+      state: present
+      cidr: "{{vpc.cidir}}"
+      resource_tags: { "Environment":"Development" }
+      region: "{{vpc.region}}"
+      aws_secret_key: "{{key.aws_secret_key}}"
+      aws_access_key: "{{key.aws_access_key}}"
+      subnets: 
+        - cidr: 10.40.1.0/24
+          az: us-east-1a
+          resource_tags: { "Environment":"Dev", "Tier" : "Web" }
+        - cidr: 10.40.2.0/24
+          az: us-east-1b
+          resource_tags: { "Environment":"Dev", "Tier" : "App" }
+        - cidr: 10.40.3.0/24
+          az: us-east-1c
+          resource_tags: { "Environment":"Dev", "Tier" : "DB" }
+      internet_gateway: True 
+      route_tables:
+        - subnets:
+            - 10.40.1.0/24
+            - 10.40.2.0/24
+          routes:
+            - dest: 0.0.0.0/0
+              gw: igw
+          region: "{{vpc.region}}"
+      register: vpc   
+        

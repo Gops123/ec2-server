@@ -1,0 +1,15 @@
+--- 
+  ec2:
+    name: Gopal
+    vpc_id: "vpc-584e8623"
+    region: us-east-1
+    key_name: gops
+    region: us-east-1
+    instance_type: t2.micro
+    image: ami-66506c1c
+    wait: yes
+    count: 1
+    vpc_subnet_id: subnet-92c8f1f6
+    assign_public_ip: yes
+    cidr_ip: 0.0.0.0/0
+    group: Gopal

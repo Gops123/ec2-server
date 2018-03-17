@@ -1,0 +1,9 @@
+---
+  - name: aws....
+    hosts: localhost
+    connection: local
+    gather_facts: false
+    become: true
+    roles: 
+     # - vpc
+      - ec2

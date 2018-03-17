@@ -1,0 +1,37 @@
+---
+  - name: create security Group
+    ec2_group:
+      name: "{{ec2.name}}"
+      description: allow rules 22
+      vpc_id: "{{ec2.vpc_id}}" 
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: "{{ec2.cidr_ip}}"
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{ec2.cidr_ip}}"
+      rules_egress:
+        - proto: all
+          from_port: 80
+          to_port: 80
+          cidr_ip: "{{ec2.cidr_ip}}"
+     # register: Gopal  
+     
+  - name: provision ec2 Instance
+    ec2:
+      key_name: "{{ec2.key_name}}"
+      region: "{{ec2.region}}"
+      instance_type: "{{ec2.instance_type}}"
+      image: "{{ec2.image}}"
+      wait: "{{ec2.wait}}"
+      count: "{{ec2.count}}"
+     # instance_tags: server
+      group: "{{ec2.group}}"
+      vpc_subnet_id: "{{ec2.vpc_subnet_id}}"
+      assign_public_ip: "{{ec2.assign_public_ip}}"
+    register: ec2
+    tags: 
+      - ec2config
