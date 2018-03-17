@@ -1,8 +1,0 @@
----
-# defaults file for vpc
-  vpc:
-    cidr_block: 10.40.0.0/16
-    region: us-east-1
-    dest: 0.0.0.0/0
-   # aws_secret_key: CONVkEZJjQfmqG9SIfHaQ9dTMFCVISzWonL/9gxt
-   # aws_access_key: AKIAIO3J7CG6HR3SCTYA
